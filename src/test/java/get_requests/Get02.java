@@ -1,3 +1,5 @@
+package get_requests;
+
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +27,7 @@ public class Get02 {
 @Test
     public void get01(){
     // 1.Step:  Set the Url
-    String url=" https://restful-booker.herokuapp.com/booking/1005";
+    String url=" https://restful-booker.herokuapp.com/booking/3";
 
     // 2.Step:  ii) Set the expected data(POT-PUT-PATCH)
 
@@ -36,16 +38,20 @@ public class Get02 {
     response.then().assertThat().statusCode(404).statusLine("HTTP/1.1 404 Not Found");
 
     //response body'de bulunana spesifik bir veri nasil assert edilir:
+    //assertTrue() methodu parantezin icindeki deger true ise testi gecirir
     assertTrue(response.asString().contains("Not Found"));
 
 
     //response body'de spesifik bir verinin bulunmadigi nasil assert edilir:
+    //assertFalse() methodu parantezin icindeki deger false ise testi gecirir
     assertFalse(response.asString().contains("TechProEd"));
 
-    assertEquals("Cowboy",response.header("Server"));
 
+    assertEquals("Cowboy",response.header("Server")); //server header altinda yer aliyor
+ // Server burda bir key ve value'si Cowboy'dur.
+    //value'si Cowboy olan headr est midir Cowboy'a? cevap evet ve test passed
 
-    System.out.println(response.header(("Server")));
+    System.out.println(response.header(("Server")));   // Cowboy
 
 
 }
